@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для Sabrina</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f3f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            color: #d46a6a;
+        }
+        
+        #password-screen {
+            text-align: center;
+        }
+        
+        #password-screen input {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #d46a6a;
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        #password-screen button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #d46a6a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
+        #envelope-container {
+            display: none;
+            text-align: center;
+        }
+        
+        .envelope {
+            width: 200px;
+            height: 120px;
+            background-color: #f8d7d7;
+            border: 2px solid #d46a6a;
+            border-radius: 5px;
+            position: relative;
+            cursor: pointer;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .envelope:before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 60px solid #f8d7d7;
+            transform-origin: top;
+            transform: rotateX(0deg);
+            z-index: 3;
+            transition: all 0.5s ease;
+        }
+        
+        .envelope.open:before {
+            transform: rotateX(180deg);
+        }
+        
+        .envelope-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        #video-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 100;
+        }
+        
+        #video-player {
+            width: 100%;
+            height: 100%;
+        }
+        
+        #quote {
+            display: none;
+            font-size: 24px;
+            text-align: center;
+            padding: 20px;
+            max-width: 80%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="password-screen">
+        <h1>Введите имя:</h1>
+        <input type="text" id="name-input" placeholder="Введите имя">
+        <button id="submit-btn">Открыть</button>
+    </div>
+    
+    <div id="envelope-container">
+        <div class="envelope" id="envelope">
+            <div class="envelope-text">Открой меня</div>
+        </div>
+    </div>
+    
+    <div id="video-container">
+        <video id="video-player" controls>
+            <!-- Здесь будет ваше видео -->
+            Пример: <source src="/video/video_2025-08-17_20-38-20.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+    </div>
+    
+    <div id="quote">
+        Сегодня особенный день, потому что именно в нём я встретил тебя
+    </div>
+    
+    <script>
+        document.getElementById('submit-btn').addEventListener('click', function() {
+            const name = document.getElementById('name-input').value.trim();
+            if (name.toLowerCase() === 'sabrina') {
+                document.getElementById('password-screen').style.display = 'none';
+                document.getElementById('envelope-container').style.display = 'block';
+            } else {
+                alert('Неверное имя. Попробуйте еще раз.');
+            }
+        });
+        
+        document.getElementById('envelope').addEventListener('click', function() {
+            this.classList.add('open');
+            
+            setTimeout(() => {
+                document.getElementById('envelope-container').style.display = 'none';
+                document.getElementById('video-container').style.display = 'block';
+                
+                const video = document.getElementById('video-player');
+                video.play();
+                
+                video.addEventListener('ended', function() {
+                    document.getElementById('video-container').style.display = 'none';
+                    document.getElementById('quote').style.display = 'block';
+                });
+            }, 1000);
+        });
+        
+        // Добавляем возможность нажать Enter в поле ввода
+        document.getElementById('name-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('submit-btn').click();
+            }
+        });
+        navigator 
+    </script>
+</body>
+</html>
